@@ -6,10 +6,20 @@ import router from './router'
 
 Vue.config.productionTip = false
 
+Vue.mixin({
+  created: function () {
+    // 全局混入参数
+    var myOption = this.$options.myOption
+    if (myOption) {
+      console.log(myOption)
+    }
+  }
+})
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  myOption: 'gao'
 })

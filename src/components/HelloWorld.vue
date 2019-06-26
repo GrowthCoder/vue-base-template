@@ -1,94 +1,44 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
+    <b-form :model="formValidate" :rules="ruleValidate">
+      <b-form-item label="用户名" prop="name">
+        <b-input type="text" v-model="formValidate.name" />
+      </b-form-item>
+      <b-form-item label="邮箱" prop="mail">
+        <b-input type="text" v-model="formValidate.mail" />
+      </b-form-item>
+    </b-form>
   </div>
 </template>
 
 <script>
+import BForm from '@/components/form/form'
+import BFormItem from '@/components/form/form-item'
+import BInput from '@/components/input/input'
+
 export default {
   name: 'HelloWorld',
+  components: {
+    BForm,
+    BFormItem,
+    BInput
+  },
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      formValidate: {
+        name: '',
+        mail: ''
+      },
+      ruleValidate: {
+        name: [
+          { required: true, message: '用户名不能为空', trigger: 'blur' }
+        ],
+        mail: [
+          { required: true, message: '邮箱不能为空', trigger: 'blur' },
+          { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
+        ]
+      }
     }
   }
 }
