@@ -1,8 +1,8 @@
 <template>
   <div class="reward">
     <ul>
-      <li class="base-transform" 
-        :class="{'scroll-animation': startScroll}" 
+      <li class="base-transform"
+        :class="{'scroll-animation': startScroll}"
         v-for="num in 6" :key="num">
         <div v-for="(item, index) in rewardList" :key="index">{{item}}</div>
       </li>
@@ -15,7 +15,8 @@
 export default {
   data () {
     return {
-      rewardList: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      rewardList: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'a', 'b', 'c', 'd', 'e', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+        'o', 'p', 'q', 'r', 's', 't'],
       startScroll: false
     }
   },
@@ -44,9 +45,11 @@ ul {
   height: 50px;
   overflow: hidden;
   li {
+    // position: absolute;
     width: 50px;
     font-size: 30px;
     text-align: center;
+    // height: 50px;
     line-height: 50px;
     border: 1px solid #ccc;
   }
@@ -65,7 +68,7 @@ button {
   transition-timing-function: ease-out;
 }
 .scroll-animation {
-  animation: scrollAni 0.2s linear infinite;
+  animation: scrollAni 1s linear infinite;
 }
 @keyframes scrollAni {
   0% {

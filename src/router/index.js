@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
-import Tiger from '@/components/mobile/tiger'
+import Tiger from '@/components/mobile/tiger2'
 
 Vue.use(Router)
 
