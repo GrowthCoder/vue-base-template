@@ -22,13 +22,15 @@
 </template>
 <script>
 export default {
+  props: {
+    prizeId: String // 中奖id
+  },
   data () {
     return {
       round: 6, // 转几回合后停下来
-      prizes: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+      prizes: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
       disClick: false, // 防止多次点击
       itemHeight: 65, // 每个奖品的高度
-      prize_id: '', // 中奖id
       groupsHeight: 0,
       startGame: false // 控制游戏开启
     }
@@ -50,21 +52,25 @@ export default {
       if (this.disClick) {
         return
       }
-      // 获取中奖的id
-      let index = parseInt(Math.random() * this.prizes.length)
-      this.prizd_id = this.prizes[index]
-      this.runGame(index)
+      this.runGame()
     },
-    runGame (index) { // 启动抽奖
+    getIndexs () {
+      let indexs = []
+      const prizeId = this.prizeId
+      for (let i = 0; i < prizeId.length; i++) {
+        indexs.push(this.prizes.indexOf(prizeId[i]))
+      }
+      return indexs
+    },
+    runGame () { // 启动抽奖
       this.disClick = true
       this.resetGame()
       let itemHeight = this.itemHeight
       let groupsHeight = this.round * this.$refs.groupItem[0].clientHeight
       let groups = this.$refs.groups
+
       groups.forEach((val, i) => {
-        console.log(index, itemHeight, groupsHeight, '1')
-        let pos = index * itemHeight + groupsHeight
-        console.log(pos, '1')
+        let pos = this.getIndexs()[i] * itemHeight + groupsHeight
         setTimeout(() => {
           val.className = 'groups animation-ease'
           val.style.transform = `translate3d(0, -${pos}px, 0)`
@@ -72,9 +78,9 @@ export default {
       })
     },
     endGame (k) { // 抽奖结束后的回调
-      if (k === 3) {
-        alert('恭喜您中了' + this.prizd_id)
+      if (k === 6) {
         this.disClick = false
+        this.$emit('gameEnd', this.prizeId)
       }
     },
     resetGame () { // 重置状态
