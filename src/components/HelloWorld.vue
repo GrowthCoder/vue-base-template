@@ -8,6 +8,13 @@
         <b-input type="text" v-model="formValidate.mail" />
       </b-form-item>
     </b-form>
+    <!-- <b-checkbox v-model="single">single</b-checkbox> -->
+
+    <b-checkbox-group v-model="multiple">
+      <b-checkbox label="option1">single</b-checkbox>
+      <b-checkbox label="option2">single</b-checkbox>
+    </b-checkbox-group>
+    <button @click="changeCheck">click</button>
   </div>
 </template>
 
@@ -15,17 +22,22 @@
 import BForm from '@/components/form/form'
 import BFormItem from '@/components/form/form-item'
 import BInput from '@/components/input/input'
-
+import BCheckbox from '@/components/checkbox/checkbox'
+import BCheckboxGroup from '@/components/checkbox/checkbox-group'
 export default {
   name: 'HelloWorld',
   components: {
     BForm,
     BFormItem,
-    BInput
+    BInput,
+    BCheckbox,
+    BCheckboxGroup
   },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
+      single: true,
+      multiple: ['option1'],
       formValidate: {
         name: '',
         mail: ''
@@ -39,6 +51,11 @@ export default {
           { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
         ]
       }
+    }
+  },
+  methods: {
+    changeCheck () {
+      this.single = this.multiple = []
     }
   }
 }
@@ -59,5 +76,13 @@ li {
 }
 a {
   color: #42b983;
+}
+button {
+  width: 80px;
+  height: 40px;
+  background: #42b983;
+  color: #fff;
+  border-radius: 12px;
+  margin-top: 20px;
 }
 </style>
