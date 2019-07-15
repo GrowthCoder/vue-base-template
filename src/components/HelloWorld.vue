@@ -15,6 +15,12 @@
       <b-checkbox label="option2">single</b-checkbox>
     </b-checkbox-group>
     <button @click="changeCheck">click</button>
+    <p v-if="show" ref="node">11111</p>
+
+    <!-- model -->
+    <b-model
+      @input="handleModelStatus"
+      v-model="modelVal"></b-model>
   </div>
 </template>
 
@@ -24,6 +30,7 @@ import BFormItem from '@/components/form/form-item'
 import BInput from '@/components/input/input'
 import BCheckbox from '@/components/checkbox/checkbox'
 import BCheckboxGroup from '@/components/checkbox/checkbox-group'
+import BModel from '@/components/model/index.vue'
 export default {
   name: 'HelloWorld',
   components: {
@@ -31,13 +38,16 @@ export default {
     BFormItem,
     BInput,
     BCheckbox,
-    BCheckboxGroup
+    BCheckboxGroup,
+    BModel
   },
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
       single: true,
       multiple: ['option1'],
+      modelVal: false,
+      show: false,
       formValidate: {
         name: '',
         mail: ''
@@ -55,7 +65,17 @@ export default {
   },
   methods: {
     changeCheck () {
+      this.modelVal = !this.modelVal
       this.single = this.multiple = []
+      this.show = true
+      console.log(this.$refs.node)
+      this.$nextTick(() => {
+        console.log(this.$refs.node)
+      })
+    },
+    handleModelStatus (val) {
+      console.log(val)
+      this.modelVal = val
     }
   }
 }

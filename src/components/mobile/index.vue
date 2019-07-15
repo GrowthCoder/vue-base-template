@@ -1,6 +1,6 @@
 <template>
   <div class="game">
-    <game prizeId="123bbb"
+    <game prizeId="111113"
       @gameEnd="endGame"></game>
   </div>
 </template>

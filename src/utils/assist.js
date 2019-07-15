@@ -4,7 +4,7 @@ export function findComponentUpward (context, componentName) {
   let name = parent.$options.name
 
   while (parent && (!name || [componentName].indexOf(name) < 0)) {
-    parent = parent.$parents
+    parent = parent.$parent
 
     if (parent) name = parent.$options.name
   }

@@ -12,7 +12,7 @@
             v-for="i in (round+1)" :key="i">
               <li class="prize-item"
                 ref="prizeItem"
-                v-for="item in prizes" :key="item">{{item}}</li>
+                v-for="item in prizes" :key="item"><img src="./game.png" alt=""></li>
           </ul>
       </div>
     </div>
@@ -27,8 +27,8 @@ export default {
   },
   data () {
     return {
-      round: 6, // 转几回合后停下来
-      prizes: ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'], // 存放0-9a-zA-Z 中奖列表
+      round: 1, // 转几回合后停下来
+      prizes: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'], // 存放0-9a-zA-Z 中奖列表
       disClick: false, // 防止多次点击
       itemHeight: 65, // 每个奖品的高度
       groupsHeight: 0
@@ -116,15 +116,18 @@ ul {
 }
 .reward-box{
   width:300px;
-  height:65px;
+  height:60px;
   overflow: hidden;
   background: #fff;
   display: flex;
   border: 1px solid #CCC;
   border-right: none;
   will-change: transform;
+  transform-style: preserve-3d;
   .animation-ease{
-    transition: transform 4s cubic-bezier(0, 0, 0.2, 1);
+    transition-property: transform;
+    transition-timing-function: ease-in-out;
+    transition-duration: 4s;
     transform-style: preserve-3d;
   }
 
@@ -133,7 +136,7 @@ ul {
     text-align: center;
 
     .prize-item{
-      height: 65px;
+      // height: 65px;
       font-size: 50px;
       border-right: 1px solid #CCC;
 
